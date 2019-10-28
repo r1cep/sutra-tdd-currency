@@ -3,13 +3,8 @@ declare(strict_types=1);
 
 namespace App;
 
-class Dollar
+class Dollar extends Money
 {
-    /**
-     * @var int
-     */
-    private $amount;
-
     public function __construct(int $amount)
     {
         $this->amount = $amount;
@@ -22,15 +17,5 @@ class Dollar
     public function times(int $multiplier): self
     {
         return new self($this->amount * $multiplier);
-    }
-
-    /**
-     * @param object $object
-     * @return bool
-     */
-    public function equals(object $object): bool
-    {
-        $dollar = $object;
-        return $this->amount === $dollar->amount;
     }
 }
