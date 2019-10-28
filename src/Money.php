@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
-abstract class Money
+class Money
 {
     /**
      * @var int
@@ -26,12 +26,14 @@ abstract class Money
         $this->currency = $currency;
     }
 
-
     /**
      * @param int $multiplier
      * @return Money
      */
-    abstract public function times(int $multiplier): Money;
+    public function times(int $multiplier): Money
+    {
+        return new self($this->amount * $multiplier, $this->currency);
+    }
 
     /**
      * @return string
@@ -47,9 +49,18 @@ abstract class Money
      */
     public function equals(object $object): bool
     {
+        /** @var Money $money */
         $money = $object;
         return $this->amount === $money->amount
-            && get_class($this) === get_class($money);
+            && $this->currency === $money->currency;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->amount . ' ' . $this->currency;
     }
 
     /**
