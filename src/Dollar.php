@@ -8,7 +8,7 @@ class Dollar
     /**
      * @var int
      */
-    public $amount;
+    private $amount;
 
     public function __construct(int $amount)
     {
@@ -30,6 +30,7 @@ class Dollar
      */
     public function equals(object $object): bool
     {
-        return $this->amount === $object->amount;
+        $dollar = $object;
+        return $this->amount === $dollar->amount;
     }
 }
