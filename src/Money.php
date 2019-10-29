@@ -8,12 +8,12 @@ class Money implements Expression
     /**
      * @var int
      */
-    public $amount;
+    protected $amount;
 
     /**
      * @var string
      */
-    public $currency;
+    protected $currency;
 
     /**
      * Money constructor.
@@ -97,5 +97,13 @@ class Money implements Expression
     public static function franc(int $amount): Money
     {
         return new Money($amount, 'CHF');
+    }
+
+    /**
+     * @return int
+     */
+    public function amount(): int
+    {
+        return $this->amount;
     }
 }

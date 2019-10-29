@@ -8,12 +8,12 @@ class Sum implements Expression
     /**
      * @var Money
      */
-    public $augend;
+    private $augend;
 
     /**
      * @var Money
      */
-    public $addend;
+    private $addend;
 
     /**
      * Sum constructor.
@@ -32,8 +32,24 @@ class Sum implements Expression
      */
     public function reduce(string $to): Money
     {
-        $amount = $this->augend->amount + $this->addend->amount;
+        $amount = $this->augend->amount() + $this->addend->amount();
 
         return new Money($amount, $to);
+    }
+
+    /**
+     * @return Money
+     */
+    public function augend(): Money
+    {
+        return $this->augend;
+    }
+
+    /**
+     * @return Money
+     */
+    public function addend(): Money
+    {
+        return $this->addend;
     }
 }
