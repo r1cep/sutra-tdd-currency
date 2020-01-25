@@ -6,6 +6,12 @@ namespace App;
 interface Expression
 {
     /**
+     * @param int $multiplier
+     * @return Expression
+     */
+    public function times(int $multiplier): Expression;
+
+    /**
      * @param Expression $addend
      * @return Expression
      */
