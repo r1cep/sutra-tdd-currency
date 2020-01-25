@@ -6,6 +6,12 @@ namespace App;
 interface Expression
 {
     /**
+     * @param Expression $addend
+     * @return Expression
+     */
+    public function plus(Expression $addend): Expression;
+
+    /**
      * @param Bank $bank
      * @param string $to
      * @return Money
