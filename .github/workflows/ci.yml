@@ -1,0 +1,26 @@
+name: Test with docker-compose
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build docker image using docker-compose
+        run: docker-compose --file docker-compose.yml build
+
+      - name: Install composer plugin
+        run: |
+            docker-compose run --rm php composer config -g repositories.packagist composer https://packagist.jp
+            docker-compose run --rm php composer global require hirak/prestissimo
+
+      - name: Run composer install
+        run: docker-compose run --rm php composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run tests
+        run: docker-compose run --rm php ./vendor/bin/phpunit --testdox
